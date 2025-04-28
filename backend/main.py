@@ -7,7 +7,7 @@ from pypdf import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.vectorstores import FAISS
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import chat_models
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
@@ -29,6 +29,8 @@ def verify_google_key():
         return False
 
 load_dotenv()
+apiKey = os.getenv("GOOGLE_API_KEY")
+print(f"Retrieved API Key: {apiKey}")
 if not verify_google_key():
     raise RuntimeError("Invalid Google API Key configuration")
 
@@ -69,7 +71,7 @@ def create_conversation_chain(text_chunks: list[str]):
     vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
     
     # Initialize Google Chat model
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.3)
+    llm = chat_models.ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.3)
     
     memory = ConversationBufferMemory(
         memory_key="chat_history",
@@ -158,5 +160,6 @@ async def ask_question(session_id: str, question: str):
         raise HTTPException(500, f"Error generating answer: {str(e)}")
 
 if __name__ == "__main__":
+    load_dotenv()
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
