@@ -33,14 +33,6 @@ const FileUpload = ({ onSuccess }) => {
 
     setLoading(true);
     try {
-      // const res = await axios.post('http://localhost:8000/upload', formData, {  //Removed axios
-      //   headers: { 'Content-Type': 'multipart/form-data' }
-      // });
-      // onSuccess(res.data.session_id);
-
-      //Simulate a post request.
-      console.log("formdata ", [...formData.entries()]); // crucial line for debugging
-      
       const res = await fetch('http://localhost:8000/upload', {
         method: 'POST',
         body: formData,
@@ -61,7 +53,9 @@ const FileUpload = ({ onSuccess }) => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <>
+    <h1 className='text-center mt-10 text-3xl font-bold bg-blue-200'>PDF Reader</h1>
+    <div className="max-w-2xl  mt-10 mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Upload PDF Files</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="mb-6">
@@ -127,6 +121,7 @@ const FileUpload = ({ onSuccess }) => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

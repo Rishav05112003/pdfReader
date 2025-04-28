@@ -26,8 +26,7 @@ const ChatWindow = ({ sessionId }) => {
     setInput('');
     setLoading(true);
     
-    console.log("Data being sent to /ask:", { session_id: sessionId, question: input }, "types of them are", typeof(sessionId), " ", typeof(input));
-    console.log("type of question",typeof(input));
+   
     
     try {
       const res = await axios.post('http://localhost:8000/ask', {
