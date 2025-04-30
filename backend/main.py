@@ -131,8 +131,6 @@ class AskRequest(BaseModel):
 
 @app.post("/ask")
 async def ask_test(request_body: AskRequest):
-    print(f"Received question in /test_ask: {request_body.question}, type: {type(request_body.question)}")
-    print(f"Received question in /test_ask: {request_body.session_id}, type: {type(request_body.session_id)}")
 
     session_id = request_body.session_id
     question = request_body.question
