@@ -49,7 +49,7 @@ const ChatWindow = ({ sessionId }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen max-w-3xl mx-auto bg-white shadow-lg">
+    <div className="flex flex-col h-screen pt-10 max-w-3xl mx-auto bg-white shadow-lg">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((message, index) => (
           <div

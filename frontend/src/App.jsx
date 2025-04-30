@@ -7,7 +7,7 @@ function App() {
   const [sessionId, setSessionId] = useState(null);
 
   return (
-    <div className="app">
+    <div className="app bg-gray-100">
       {!sessionId ? (
         <FileUpload onSuccess={setSessionId} />
       ) : (

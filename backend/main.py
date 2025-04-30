@@ -92,14 +92,6 @@ def create_conversation_chain(text_chunks: list[str]):
 
 @app.post("/upload")
 async def upload_files(files: list[UploadFile]):
-    file_names = []
-    for file in files:
-        file_names.append(file.filename)
-        if file.content_type != 'application/pdf':
-            raise HTTPException(400, "Only PDF files allowed")
-    print("filenames", file_names)
-    
-
     raw_text = get_pdf_text(files)
 
     if not raw_text.strip():
